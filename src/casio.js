@@ -7,24 +7,20 @@ $('#overlay').hide();
   document.querySelector('#btn_send').onclick = function () {
 name = $('#name').attr("value");
 phone = $('#phone').attr("value");
-
+url = 'http://101.132.146.155/users/gttddki?name='+name+'&phone='+phone;
             $.ajax({
-            type:"post",
-                url: 'http://101.132.146.155/users/gttddki',
-                data: {
-                    r: new Date().getTime()
-                },
- dataType: "jsonp", crossDomain: true,
- jsonpCallback: "sucCallback",
+            type:"get",
+                url: url,
                 error: function(a,b){
-                    console.log(a,b, 'error');
+                  var  toast;
+                  toast = $('#toast-info').ZPopup('toast');
+                  toast.showToast('请稍后重试');
                 },
                 success: function(a){
-                    console.log(a, 'success');
-                },
-                complete: function(a){
-                    console.log(a, 'complete');
+                  $('#input_form').hide();
+                  $('#byebyemsg').show();
                 },
                 timeout: 3000
-            });   
+            });
+            return false;
   };
