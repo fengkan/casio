@@ -9,11 +9,13 @@ name = $('#name').attr("value");
 phone = $('#phone').attr("value");
 
             $.ajax({
+            type:"post",
                 url: 'http://101.132.146.155/users/gttddki',
                 data: {
                     r: new Date().getTime()
                 },
-                dataType: 'json',
+ dataType: "jsonp", crossDomain: true,
+ jsonpCallback: "sucCallback",
                 error: function(a,b){
                     console.log(a,b, 'error');
                 },
