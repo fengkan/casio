@@ -4,8 +4,9 @@ function getPrizeURL() {
     
     $.getJSON(url, function(data){
     })
-    prize = 4;
-    
+    prize = Math.floor(Math.random() * 4) + 1;
+    alert(prize);
+
     if (prize == 4) {
       url = "p5.html"
     } else {

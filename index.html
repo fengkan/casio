@@ -97,6 +97,7 @@
       margin: 0 auto
     }
   </style>
+  <title>声色迷宫玩一把，颜值秒提180</title>
 </head>
 
 <body>
@@ -167,7 +168,7 @@
       url = "http://casio.maxantad.com/users/" + userID
       
       $.getJSON(url, function(data){
-        prize = data["result"]["prize_id"];
+        prize = data["result"]["coupon"];
         play_count = data["result"]["play_count"];
         share_count = data["result"]["share_count"];
 
