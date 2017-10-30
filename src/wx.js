@@ -29,6 +29,7 @@ if(isMicroMessenger) {
 			link: "http://casio.maxantad.com/index.html", 
 			imgUrl: "http://cdn.dev.egret.com/examples/wonderful_1_3/logo.png", 
 			success: function () {
+        sendShared();
 				console.log("onMenuShareTimeline success");
 			},
 			cancel: function () {
@@ -43,6 +44,7 @@ if(isMicroMessenger) {
 			type: "", 
 			dataUrl: "", 
 			success: function () {
+        sendShared();
 				console.log("onMenuShareAppMessage success");
 			},
 			cancel: function () {
@@ -52,7 +54,6 @@ if(isMicroMessenger) {
 	});
 
 } else {
-sendShared();
 }
 
     });
