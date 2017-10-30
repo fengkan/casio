@@ -47,6 +47,8 @@
 <script src="src/zepto.js"></script>
 <script src="src/zepto-popup.js"></script>
 <script src="src/casio.js"> </script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="src/wx.js"> </script>
 
 <script type="text/javascript">
     function getUrlParam(name) {
@@ -55,6 +57,10 @@
         if (r != null) return unescape(r[2]); return null; 
     }
     $(document).ready(function () {
+       userID = getUserId();
+       if (userID === null) {
+          window.location.href="index.html";
+       }
       prize = getUrlParam("p");
       imgurl = "";
       if (prize == 1) {
@@ -75,6 +81,27 @@
   document.querySelector('#btn_close').onclick = function () {
     $('#overlay').hide();
   };
+  document.querySelector('#btn_send').onclick = function () {
+    name = $('#name').attr("value");
+    phone = $('#phone').attr("value");
+    url = 'http://casio.maxantad.com/users/' + userID + '?name='+name+'&phone='+phone;
+    $.ajax({
+    type:"get",
+        url: url,
+        error: function(a,b){
+          var  toast;
+          toast = $('#toast-info').ZPopup('toast');
+          toast.showToast('请稍后重试');
+        },
+        success: function(a){
+          $('#input_form').hide();
+          $('#byebyemsg').show();
+        },
+        timeout: 3000
+    });
+    return false;
+  };
+  
 </script>  
 
 </body></html>

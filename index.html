@@ -147,7 +147,8 @@
       
       // 点击礼盒后，取消 timeout，防止页面自动跳转，同时通知服务器用户已领取奖券
       clearTimeout(couponTimeout);
-      url = 'http://casio.maxantad.com/users/gttddki/prize?coupon=1';
+      
+      url = 'http://casio.maxantad.com/users/' + userID + '/prize?coupon=1';
       $.ajax({
       type:"get",
           url: url,
@@ -160,7 +161,10 @@
       });
     }
     window.addEventListener("load", function () {
-      $.getJSON('http://casio.maxantad.com/users/gttddki', function(data){
+      userID = setUserId();
+      url = "http://casio.maxantad.com/users/" + userID
+      
+      $.getJSON(url, function(data){
         prize = data["result"]["prize_id"];
         play_count = data["result"]["play_count"];
         share_count = data["result"]["share_count"];
@@ -192,9 +196,6 @@
         game.state.add('game', Game);
         game.state.start('game');
     }
-    function fetchCoupon() {
-      window.location = "http://coupon.m.jd.com/coupons/show.action?key=c9400b2e688843119613987a5d4ed962&roleId=8697713&to=http://sale.jd.com/m/act/BoSnJdIValMH.html"
-    }
     function hideRule() {
       document.querySelector('#rule-overlay').className = "hidden"
       game.paused = false
@@ -217,6 +218,9 @@
   <script src="src/phaser.js"></script>
   <script src="src/casio.js"></script>
   <script src="src/Game.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="src/wx.js"></script>
+  <script src="src/zepto.js"></script>
   <div id="game-page" class="page" style="z-index:98">
     <div id="rule-overlay" style="position:fixed;width:100%;height:100%;background-color:#231f20">
       <div style="width:100%;height:89vw;position:absolute;top:20vh;margin:0 auto;text-align:center">
