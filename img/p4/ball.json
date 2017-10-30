@@ -1,0 +1,16 @@
+{ 
+    
+    "ball": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   75, 18  ,  86, 47  ,  74, 74  ,  46, 86  ,  6, 46  ,  16, 19  ,  46, 5  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   6, 46  ,  46, 86  ,  17, 74  ]
+        }
+    ]
+}
