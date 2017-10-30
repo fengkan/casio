@@ -30,7 +30,7 @@ Game.prototype = {
 		var trap = this.add.sprite(540, 960)
 		var ball = this.add.sprite(50, 380, 'ball');
 		var dest = this.add.sprite(540, 960, 'destination');
-		game.physics.p2.enable([maze, trap, ball, dest], true);
+		game.physics.p2.enable([maze, trap, ball, dest]);
 		maze.body.clearShapes();
 		maze.body.loadPolygon('maze', 'maze');
 		maze.body.static = true
