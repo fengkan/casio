@@ -7,7 +7,7 @@ $('#overlay').hide();
   document.querySelector('#btn_send').onclick = function () {
 name = $('#name').attr("value");
 phone = $('#phone').attr("value");
-url = 'http://101.132.146.155/users/gttddki?name='+name+'&phone='+phone;
+url = 'http://casio.maxantad.com/users/gttddki?name='+name+'&phone='+phone;
             $.ajax({
             type:"get",
                 url: url,
