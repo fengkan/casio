@@ -63,6 +63,7 @@ Game.prototype = {
 		}
 		var winGame = function () {
       prizeURL = getPrizeURL();
+      sendplayed();
       window.location.href = prizeURL;
 		}
 		ball.body.collides(trapCollisionGroup, winGame)

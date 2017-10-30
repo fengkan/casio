@@ -147,18 +147,8 @@
       
       // 点击礼盒后，取消 timeout，防止页面自动跳转，同时通知服务器用户已领取奖券
       clearTimeout(couponTimeout);
-      
-      url = 'http://casio.maxantad.com/users/' + userID + '/prize?coupon=1';
-      $.ajax({
-      type:"get",
-          url: url,
-          error: function(a,b){
-            var  toast;
-          },
-          success: function(a){
-          },
-          timeout: 3000
-      });
+      sendCoupon();
+
     }
     window.addEventListener("load", function () {
       userID = setUserId();

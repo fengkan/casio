@@ -1,6 +1,8 @@
 function getPrizeURL() {
     var prize;
-    $.getJSON('http://casio.maxantad.com/users/gttddki/prize', function(data){
+    url = 'http://casio.maxantad.com/users/' + userID + '/prizes';
+    
+    $.getJSON(url, function(data){
     })
     prize = 4;
     
@@ -42,3 +44,50 @@ function getUserId() {
       uuid = LS.getItem('casio_user_id');
       return uuid;
 }
+
+function sendShared() {
+      userID = getUserId();
+      url = 'http://casio.maxantad.com/users/' + userID + '/prizes?shared=1';
+      $.ajax({
+      type:"get",
+          url: url,
+          error: function(a,b){
+            var  toast;
+          },
+          success: function(a){
+          },
+          timeout: 3000
+      });
+}
+
+function sendplayed() {
+      userID = getUserId();
+    url = 'http://casio.maxantad.com/users/' + userID + '/prizes?played=1';
+    $.ajax({
+    type:"get",
+        url: url,
+        error: function(a,b){
+          var  toast;
+        },
+        success: function(a){
+        },
+        timeout: 3000
+    });
+}
+
+function sendCoupon() {
+      userID = getUserId();
+    url = 'http://casio.maxantad.com/users/' + userID + '/prizes?coupon=1';
+    $.ajax({
+    type:"get",
+        url: url,
+        error: function(a,b){
+          var  toast;
+        },
+        success: function(a){
+        },
+        timeout: 3000
+    });
+}
+
+

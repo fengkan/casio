@@ -52,6 +52,7 @@ if(isMicroMessenger) {
 	});
 
 } else {
+sendShared();
 }
 
     });
