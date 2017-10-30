@@ -17,20 +17,53 @@
       z-index: 10000;
       display:none;
     }
+    #input_form{
+      position:absolute;
+      top:20%;
+      left: 5%;
+      right: 5%;
+    }
+    #name{
+      position: absolute;
+      top: 50.5%;
+      height: 9.6%;
+      width: 49.5%;
+      left: 33%;
+      background: rgba(0,0,0,0);
+      border: none;
+    }
+    #phone{
+      position: absolute;
+      top: 64%;
+      height: 9.6%;
+      width: 49.5%;
+      left: 33%;
+      background: rgba(0,0,0,0);
+      border: none;
+    }
+    #btn_send{
+      position: absolute;
+      background:rgba(0,0,0,0);
+      border: none;
+      top: 80.2%;
+      width: 48.8%;
+      left: 25.2%;
+      height: 13%;
+    }
   </style>  
 </head>
 <body ontouchstart="" data-gr-c-s-loaded="true">
 <div class="wxapi_container">
   <div id="overlay">
     <div id="input_form">
-      <img src="img/p10-msg-02.png" style="position: absolute;  top:20%;  left:5%" width="90%">
-      <img src="img/p10-close.png" style="position: absolute;  top:20%;  right:5%" width="90%"  id="btn_close"      style=" z-index: 14000;">
+      <img src="img/p10-msg-02.png" style="width:100%">
       <form>
        <input id="name" type="text">
        <input id="phone" type="text">
-       <input id="btn_send" type="image" src="img/p10-send.png" width="100" onclick='return false;'>
+       <input id="btn_send" type="button" onclick='return false;'>
       </form>
     </div>
+    <img src="img/p10-close.png" style="position: absolute;  top:20%;  right:5%" width="90%"  id="btn_close">
     <div id="byebyemsg" style="display:none;">
       <img src="img/p11-msg.png" style="position: absolute;  top:20%;  left:5%" width="90%" style=" z-index: 14000;">
     </div>
