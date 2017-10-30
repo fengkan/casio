@@ -170,27 +170,27 @@
         prize = data["result"]["prize_id"];
         play_count = data["result"]["play_count"];
         share_count = data["result"]["share_count"];
-        play_count = 0;
+
+        // 已玩一次且未分享
+        if ((play_count == 1  && share_count == 0)) {
+          window.location.href="p13.html";
+        }
+
+        // 已玩两次
+        if (play_count > 1) {
+          window.location.href="p12.html";
+        }
+        
+        // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
+        if (prize != 1) {
+          $('.gift-box').show();
+          couponTimeout = setTimeout("startGame()",  5000 )
+        } else {
+          // 否则立刻开始游戏
+          startGame();
+        }
       })
 
-      // 已玩一次且未分享
-      if ((play_count == 1  && share_count == 0)) {
-        window.location.href="p13.html";
-      }
-
-      // 已玩两次
-      if (play_count > 1) {
-        window.location.href="p12.html";
-      }
-      
-      // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
-      if (prize != 1) {
-        $('.gift-box').show();
-        couponTimeout = setTimeout("startGame()",  5000 )
-      } else {
-        // 否则立刻开始游戏
-        startGame();
-      }
     })
     
     function startGame() {

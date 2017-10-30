@@ -66,7 +66,7 @@ Game.prototype = {
       sendplayed();
       window.location.href = prizeURL;
 		}
-		ball.body.collides(trapCollisionGroup, winGame)
+		ball.body.collides(trapCollisionGroup, restartGame)
 		ball.body.collides(destCollisionGroup, winGame)
 	},
 	update: function() {
