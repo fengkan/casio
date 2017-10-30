@@ -25,9 +25,10 @@ if(isMicroMessenger) {
 
 	wx.ready(function(){
 		wx.onMenuShareTimeline({
-			title: "weixin timeline share title",
+			title: "声色迷宫玩一把，颜值秒提180",
 			link: "http://casio.maxantad.com/index.html", 
-			imgUrl: "http://cdn.dev.egret.com/examples/wonderful_1_3/logo.png", 
+			desc: "赢卡西欧TR声色礼包，寻找美颜新机",
+			imgUrl: "http://casio.maxantad.com/img/share.jpg", 
 			success: function () {
         sendShared();
 				console.log("onMenuShareTimeline success");
@@ -37,10 +38,10 @@ if(isMicroMessenger) {
 		});
 
 		wx.onMenuShareAppMessage({
-			title: "weixin app share title", 
-			desc: "description content for share", 
-			link: "http://casio.maxantad.com/index.html",
-			imgUrl: "http://cdn.dev.egret.com/examples/wonderful_1_3/logo.png",
+			title: "声色迷宫玩一把，颜值秒提180",
+			link: "http://casio.maxantad.com/index.html", 
+			desc: "赢卡西欧TR声色礼包，寻找美颜新机",
+			imgUrl: "http://casio.maxantad.com/img/share.jpg", 
 			type: "", 
 			dataUrl: "", 
 			success: function () {
