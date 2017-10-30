@@ -55,12 +55,22 @@
       background-position-y: 11.17rem;
       background-size: 100%;
       position: fixed;
-      bottom: 9rem;
+      bottom: 13rem;
       right: 4.1rem;
     }
 
     .gift-box.open {
       background-position-y: -16rem;
+    }
+
+    .gift-text {
+      width: 25.11rem;
+      height: 4rem;
+      background: url(img/p1/gift-text.png) no-repeat;
+      background-size: 100%;
+      position: fixed;
+      bottom: 9rem;
+      right: 4.1rem;
     }
 
     #coupon-page {
@@ -106,6 +116,8 @@
     </div>
     <div class="gift-box" onclick="openBox()" style="display:none;">
     </div>
+    <div class="gift-text" onclick="openBox()" style="display:none;">
+    </div>
   </div>
   
 <script src="src/zepto.js"></script>
@@ -120,6 +132,7 @@
     var play_count;
     var share_count;
 
+    var giftBox=document.querySelector(".gift-box")
     function render(timestamp) {
       if (!startTime) {
         startTime = timestamp
@@ -137,6 +150,12 @@
             loadingIndicator.className = "loading"
           }
           lastLoadingStatusTime = timestamp
+
+          if(giftBox.className=="gift-box open"){
+            giftBox.className="gift-box"
+          }else{
+            giftBox.className="gift-box open"
+          }
         }
       }
       if (!loadingComplete)
@@ -146,7 +165,6 @@
 
     var showGift = false;
     function openBox() {
-      document.querySelector(".gift-box").className += " open"
       showGift = true;
 
       document.querySelector('#loading-page').className = "page hidden"
@@ -185,6 +203,7 @@
         // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
         if (prize != 1) {
           $('.gift-box').show();
+          $('.gift-text').show();
           couponTimeout = setTimeout("startGame()",  5000 )
         } else {
           // 否则立刻开始游戏
