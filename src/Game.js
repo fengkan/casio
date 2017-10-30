@@ -62,9 +62,10 @@ Game.prototype = {
 			this.game.state.restart();
 		}
 		var winGame = function () {
-			alert("you won")
+      prizeURL = getPrizeURL();
+      window.location.href = prizeURL;
 		}
-		ball.body.collides(trapCollisionGroup, restartGame)
+		ball.body.collides(trapCollisionGroup, winGame)
 		ball.body.collides(destCollisionGroup, winGame)
 	},
 	update: function() {

@@ -1,9 +1,3 @@
-  document.querySelector('#btn_get_prize').onclick = function () {
-$('#overlay').show();
-  };
-  document.querySelector('#btn_close').onclick = function () {
-$('#overlay').hide();
-  };
   document.querySelector('#btn_send').onclick = function () {
 name = $('#name').attr("value");
 phone = $('#phone').attr("value");
@@ -24,3 +18,18 @@ url = 'http://casio.maxantad.com/users/gttddki?name='+name+'&phone='+phone;
             });
             return false;
   };
+
+function getPrizeURL() {
+    var prize;
+    $.getJSON('http://casio.maxantad.com/users/gttddki/prize', function(data){
+    })
+    prize = 4;
+    
+    if (prize == 4) {
+      url = "p5.html"
+    } else {
+      url = "p6.html?p=" + prize
+    }
+    return url;
+}
+

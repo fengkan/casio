@@ -37,7 +37,7 @@
   </div>
     <div class="wxapi_index_container">
       <img src="img/p6-bg-01.png" width="100%" style="position: relative;  top:0px;  left:0px; ">
-      <img src="img/p6-prize-02.png" style="position: absolute;  top:30%;  left:5%" width="90%">
+      <img src="" style="position: absolute;  top:30%;  left:5%" width="90%" id="prize_img">
       <button class="btn btn_primary" id="btn_get_prize">
         <img src="img/p6-button.png" style="position: absolute;  top:82%;  left:33%" width="33%">
       </button>
@@ -47,4 +47,34 @@
 <script src="src/zepto.js"></script>
 <script src="src/zepto-popup.js"></script>
 <script src="src/casio.js"> </script>
+
+<script type="text/javascript">
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); 
+        var r = window.location.search.substr(1).match(reg); 
+        if (r != null) return unescape(r[2]); return null; 
+    }
+    $(document).ready(function () {
+      prize = getUrlParam("p");
+      imgurl = "";
+      if (prize == 1) {
+        imgurl = "img/p6-prize-1.png";
+      } else if (prize == 2) {
+        imgurl = "img/p6-prize-2.png";
+      } else if (prize == 3) {
+        imgurl = "img/p6-prize-3.png";
+      }
+      $('#prize_img').attr("src", imgurl);
+      
+      if (imgurl != "") {
+        $( "#btn_get_prize").bind( "click",  function() {  
+          $('#overlay').show();
+        });  
+      }
+    });
+  document.querySelector('#btn_close').onclick = function () {
+    $('#overlay').hide();
+  };
+</script>  
+
 </body></html>
