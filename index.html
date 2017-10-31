@@ -27,8 +27,37 @@
     }
 
     #loading-page {
-      background: #fff url(img/p1/bg.png) no-repeat center;
-      background-size: cover;
+      background: #fff url(img/p1/bg.png) center/cover no-repeat;
+    }
+
+    .elements-1 {
+      width: 100%;
+      height: 100%;
+      background: url(img/p1/elements-1.png) center/contain no-repeat;
+      position: fixed;
+    }
+
+    .elements-2 {
+      width: 100%;
+      height: 100%;
+      background: url(img/p1/elements-2.png) center/contain no-repeat;
+      position: fixed;
+    }
+
+    .logo {
+      width: 100%;
+      height: 8.24vw;
+      background: url(img/p1/logo.png) center/contain no-repeat;
+      position: fixed;
+      top: 5.2%;
+    }
+
+    .title {
+      width: 100%;
+      height: 22.6vw;
+      background: url(img/p1/title.png) center/contain no-repeat;
+      position: fixed;
+      top: 30.5%;
     }
 
     .loading {
@@ -112,6 +141,14 @@
 
 <body>
   <div id="loading-page" class="page" style="z-index:100">
+    <div class="elements-1">
+    </div>
+    <div class="elements-2">
+    </div>
+    <div class="logo">
+    </div>
+    <div class="title">
+    </div>
     <div class="loading">
     </div>
     <div class="gift-box" onclick="openBox()" style="display:none;">
@@ -119,9 +156,9 @@
     <div class="gift-text" onclick="openBox()" style="display:none;">
     </div>
   </div>
-  
-<script src="src/zepto.js"></script>
-<script type="application/javascript">
+
+  <script src="src/zepto.js"></script>
+  <script type="application/javascript">
     var startTime = null
     var lastLoadingStatusTime = 0
     var loadingStatus = 0
@@ -132,7 +169,9 @@
     var play_count;
     var share_count;
 
-    var giftBox=document.querySelector(".gift-box")
+    var giftBox = document.querySelector(".gift-box")
+    var elements1 = document.querySelector(".elements-1")
+    var elements2 = document.querySelector(".elements-2")
     function render(timestamp) {
       if (!startTime) {
         startTime = timestamp
@@ -151,12 +190,18 @@
           }
           lastLoadingStatusTime = timestamp
 
-          if(giftBox.className=="gift-box open"){
-            giftBox.className="gift-box"
-          }else{
-            giftBox.className="gift-box open"
+          if (giftBox.className == "gift-box open") {
+            giftBox.className = "gift-box"
+          } else {
+            giftBox.className = "gift-box open"
           }
         }
+
+        var elapsed = timestamp - startTime
+        var pos = (elapsed % 6000) * 3 / 6000
+        if (pos > 1.5) pos = 3 - pos
+        elements1.style.top = pos + "%"
+        elements2.style.top = -pos + "%"
       }
       if (!loadingComplete)
         window.requestAnimationFrame(render)
@@ -169,7 +214,7 @@
 
       document.querySelector('#loading-page').className = "page hidden"
       document.querySelector('#coupon-page').className = "page"
-      
+
       // 点击礼盒后，取消 timeout，防止页面自动跳转，同时通知服务器用户已领取奖券
       clearTimeout(couponTimeout);
       sendCoupon();
@@ -184,27 +229,27 @@
     window.addEventListener("load", function () {
       userID = setUserId();
       url = "http://casio.maxantad.com/users/" + userID
-      
-      $.getJSON(url, function(data){
+
+      $.getJSON(url, function (data) {
         prize = data["result"]["coupon"];
         play_count = data["result"]["play_count"];
         share_count = data["result"]["share_count"];
 
         // 已玩一次且未分享
-        if ((play_count == 1  && share_count == 0)) {
-          window.location.href="p13.html";
+        if ((play_count == 1 && share_count == 0)) {
+          window.location.href = "p13.html";
         }
 
         // 已玩两次
         if (play_count > 1) {
-          window.location.href="p12.html";
+          window.location.href = "p12.html";
         }
-        
+
         // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
         if (prize != 1) {
           $('.gift-box').show();
           $('.gift-text').show();
-          couponTimeout = setTimeout("startGame()",  5000 )
+          couponTimeout = setTimeout("startGame()", 5000)
         } else {
           // 否则立刻开始游戏
           startGame();
@@ -212,11 +257,11 @@
       })
 
     })
-    
+
     function startGame() {
-        game = new Phaser.Game(1080, 1920, Phaser.CANVAS, 'game-page');
-        game.state.add('game', Game);
-        game.state.start('game');
+      game = new Phaser.Game(1080, 1920, Phaser.CANVAS, 'game-page');
+      game.state.add('game', Game);
+      game.state.start('game');
     }
     function hideRule() {
       document.querySelector('#rule-overlay').className = "hidden"
@@ -226,7 +271,8 @@
       document.querySelector('#rule-overlay').className = ""
       game.paused = true
     }
-</script>
+
+  </script>
   <div id="coupon-page" class="page hidden" style="z-index:99">
     <div class="coupon-box">
       <div class="coupon-icon">
@@ -241,7 +287,8 @@
   <script src="src/casio.js"></script>
   <script src="src/Game.js"></script>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-	<script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
   <script src="src/wx.js"></script>
   <script src="src/zepto.js"></script>
   <div id="game-page" class="page" style="z-index:98">
@@ -257,4 +304,5 @@
     </div>
   </div>
 </body>
+
 </html>
