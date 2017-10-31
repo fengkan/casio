@@ -14,6 +14,8 @@ Game.prototype = {
 		this.load.image('ball', 'img/p4/ball.png')
 		this.load.physics('ball', 'img/p4/ball.json')
 		this.load.image('destination', 'img/p4/destination.png');
+		game.load.spritesheet('start', 'img/p4/start.254x36.png', 254, 36);
+		game.load.spritesheet('finish', 'img/p4/finish.264x35.png', 264, 35);
 	},
 	create: function () {
 		this.physics.startSystem(Phaser.Physics.P2JS)
@@ -26,10 +28,19 @@ Game.prototype = {
 		var mazeCollisionGroup = game.physics.p2.createCollisionGroup()
 		var trapCollisionGroup = game.physics.p2.createCollisionGroup()
 		var destCollisionGroup = game.physics.p2.createCollisionGroup()
+
 		var maze = this.add.sprite(540, 960, 'maze');
+
+		var startSprite = game.add.sprite(49, 335, 'start')
+		var startBlinkAnimation = startSprite.animations.add('blink')
+		startSprite.animations.play('blink', 4, true)
+		var finishSprite = game.add.sprite(390, 1824, 'finish')
+		var finishBlinkAnimation = finishSprite.animations.add('blink')
+		finishSprite.animations.play('blink', 4, true)
+
 		var trap = this.add.sprite(540, 960)
 		var ball = this.add.sprite(50, 380, 'ball');
-		var dest = this.add.sprite(540, 960, 'destination');
+		var dest = this.add.sprite(958, 1778, 'destination');
 		game.physics.p2.enable([maze, trap, ball, dest]);
 		maze.body.clearShapes();
 		maze.body.loadPolygon('maze', 'maze');
@@ -58,33 +69,33 @@ Game.prototype = {
 		ball.body.fixedRotation = true
 		ball.body.setCollisionGroup(ballCollisionGroup)
 		ball.body.collides(mazeCollisionGroup)
-		ball.body.mass=0.2
+		ball.body.mass = 0.2
 		var restartGame = function () {
 			this.game.state.restart();
 		}
 		var winGame = function () {
-      prizeURL = getPrizeURL();
-      sendplayed();
-      window.location.href = prizeURL;
+			prizeURL = getPrizeURL();
+			sendplayed();
+			window.location.href = prizeURL;
 		}
 		ball.body.collides(trapCollisionGroup, restartGame)
 		ball.body.collides(destCollisionGroup, winGame)
 	},
-	update: function() {
-		if(this.keys.left.isDown) {
-      game.physics.p2.gravity.x =-60
+	update: function () {
+		if (this.keys.left.isDown) {
+			game.physics.p2.gravity.x = -60
 		}
-		else if(this.keys.right.isDown) {
-      game.physics.p2.gravity.x = 60
+		else if (this.keys.right.isDown) {
+			game.physics.p2.gravity.x = 60
 
 		}
-		if(this.keys.up.isDown) {
-      game.physics.p2.gravity.y = -60
+		if (this.keys.up.isDown) {
+			game.physics.p2.gravity.y = -60
 		}
-		else if(this.keys.down.isDown) {
-      game.physics.p2.gravity.y = 60
+		else if (this.keys.down.isDown) {
+			game.physics.p2.gravity.y = 60
 		}
-},
+	},
 	handleOrientation: function (e) {
 		// Device Orientation API
 		var x = e.gamma; // range [-90,90], left-right
