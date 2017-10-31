@@ -136,11 +136,35 @@
     canvas {
       margin: 0 auto
     }
+
+    #orientation-warning {
+      background: black;
+      line-height: 100vh;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+    }
+
+    .warning-text {
+      display: inline-block;
+      color: white;
+      line-height: 2em;
+      vertical-align: middle;
+    }
   </style>
   <title>声色迷宫玩一把，颜值秒提180</title>
 </head>
 
 <body>
+  <div id="orientation-warning" class="hidden" style="z-index:101">
+    <div class="warning-text">
+      <img src="img/orientation-warning.png">
+      <p>为了更好的体验，请您竖屏浏览</p>
+      <p id="game-tips" class="hidden">
+        游戏小贴士：小球的重力感应十分灵敏，因此倾斜角度不必过大哦。
+      </p>
+    </div>
+  </div>
   <div id="loading-page" class="page" style="z-index:100">
     <div class="elements-1">
     </div>
@@ -160,6 +184,7 @@
 
   <script src="src/zepto.js"></script>
   <script type="application/javascript">
+    var inGame = false
     var startTime = null
     var lastLoadingStatusTime = 0
     var loadingStatus = 0
@@ -262,6 +287,7 @@
     })
 
     function startGame() {
+      inGame = true
       game = new Phaser.Game(1080, 1920, Phaser.CANVAS, 'game-page');
       game.state.add('game', Game);
       game.state.start('game');
@@ -284,6 +310,20 @@
         document.querySelector('#audio-button').src = "img/p4/audio-off.png"
       }
     }
+    window.addEventListener("orientationchange", function () {
+      if (window.innerHeight > window.innerWidth) {
+        document.querySelector('#orientation-warning').className = 'page'
+        if (inGame) {
+          document.querySelector('#game-tips').className = ''
+        } else {
+          document.querySelector('#game-tips').className = 'hidden'
+        }
+        game.paused = true
+      } else {
+        document.querySelector('#orientation-warning').className = 'hidden'
+        game.paused = false
+      }
+    }, false);
   </script>
   <div id="coupon-page" class="page hidden" style="z-index:99">
     <div class="coupon-box">

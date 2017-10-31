@@ -50,9 +50,44 @@
       left: 25.2%;
       height: 13%;
     }
-  </style>  
+  </style>
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    #orientation-warning {
+      background: black;
+      line-height: 100vh;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+    }
+
+    .warning-text {
+      display: inline-block;
+      color: white;
+      line-height: 2em;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body ontouchstart="" data-gr-c-s-loaded="true">
+  <div id="orientation-warning" class="hidden" style="z-index:20000">
+    <div class="warning-text">
+      <img src="img/orientation-warning.png">
+      <p>为了更好的体验，请您竖屏浏览</p>
+    </div>
+  </div>
+  <script type="application/javascript">
+    window.addEventListener("orientationchange", function () {
+      if (window.innerHeight > window.innerWidth) {
+        document.querySelector('#orientation-warning').className = 'page'
+      } else {
+        document.querySelector('#orientation-warning').className = 'hidden'
+      }
+    }, false);
+  </script>
 <div class="wxapi_container">
   <div id="overlay">
     <div id="input_form">

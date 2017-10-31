@@ -60,7 +60,7 @@ if(isMicroMessenger) {
 	});
 
 } else {
-      window.location.href="http://baidu.com";
+      // window.location.href="http://baidu.com";
 
 }
 
