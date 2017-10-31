@@ -227,6 +227,8 @@
     }
 
     window.addEventListener("load", function () {
+      document.querySelector('audio').play()
+
       userID = setUserId();
       url = "http://casio.maxantad.com/users/" + userID
 
@@ -262,7 +264,6 @@
       game = new Phaser.Game(1080, 1920, Phaser.CANVAS, 'game-page');
       game.state.add('game', Game);
       game.state.start('game');
-      document.querySelector('audio').play()
     }
     function hideRule() {
       document.querySelector('#rule-overlay').className = "hidden"
