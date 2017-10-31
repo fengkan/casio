@@ -24,6 +24,8 @@ if(isMicroMessenger) {
 	});
 
 	wx.ready(function(){
+    document.getElementById('bgmusic').play();
+    document.getElementById('bgmusic').muted = false;
 		wx.onMenuShareTimeline({
 			title: "声色迷宫玩一把，颜值秒提180",
 			link: "http://casio.maxantad.com/index.html", 
