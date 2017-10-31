@@ -230,31 +230,31 @@
       userID = setUserId();
       url = "http://casio.maxantad.com/users/" + userID
 
-      // $.getJSON(url, function (data) {
-      //   prize = data["result"]["coupon"];
-      //   play_count = data["result"]["play_count"];
-      //   share_count = data["result"]["share_count"];
+      $.getJSON(url, function (data) {
+        prize = data["result"]["coupon"];
+        play_count = data["result"]["play_count"];
+        share_count = data["result"]["share_count"];
 
-      //   // 已玩一次且未分享
-      //   if ((play_count == 1 && share_count == 0)) {
-      //     window.location.href = "p13.html";
-      //   }
+        // 已玩一次且未分享
+        if ((play_count == 1 && share_count == 0)) {
+          window.location.href = "p13.html";
+        }
 
-      //   // 已玩两次
-      //   if (play_count > 1) {
-      //     window.location.href = "p12.html";
-      //   }
+        // 已玩两次
+        if (play_count > 1) {
+          window.location.href = "p12.html";
+        }
 
-      //   // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
-      //   if (prize != 1) {
-      //     $('.gift-box').show();
-      //     $('.gift-text').show();
-      //     couponTimeout = setTimeout("startGame()", 5000)
-      //   } else {
-      //     // 否则立刻开始游戏
+        // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
+        if (prize != 1) {
+          $('.gift-box').show();
+          $('.gift-text').show();
+          couponTimeout = setTimeout("startGame()", 5000)
+        } else {
+          // 否则立刻开始游戏
           startGame();
-      //   }
-      // })
+        }
+      })
 
     })
 
@@ -272,17 +272,16 @@
       document.querySelector('#rule-overlay').className = ""
       game.paused = true
     }
-    function toggleMusic(){
-      var element=document.querySelector('audio')
-      if(element.muted){
-        element.muted=false
-        document.querySelector('#audio-button').src="img/p4/audio-on.png"
-      }else{
-        element.muted=true
-        document.querySelector('#audio-button').src="img/p4/audio-off.png"
+    function toggleMusic() {
+      var element = document.querySelector('audio')
+      if (element.muted) {
+        element.muted = false
+        document.querySelector('#audio-button').src = "img/p4/audio-on.png"
+      } else {
+        element.muted = true
+        document.querySelector('#audio-button').src = "img/p4/audio-off.png"
       }
     }
-
   </script>
   <div id="coupon-page" class="page hidden" style="z-index:99">
     <div class="coupon-box">
