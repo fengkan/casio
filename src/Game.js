@@ -69,7 +69,7 @@ Game.prototype = {
 		ball.body.fixedRotation = true
 		ball.body.setCollisionGroup(ballCollisionGroup)
 		ball.body.collides(mazeCollisionGroup)
-		ball.body.mass = 0.2
+		ball.body.mass=0.1
 		var restartGame = function () {
 			this.game.state.restart();
 		}
@@ -114,6 +114,6 @@ Game.prototype = {
 		var y = e.beta;  // range [-180,180], top-bottom
 		var z = e.alpha; // range [0,360], up-down
 		game.physics.p2.gravity.x = x * 10 > 250 ? 250 : x * 90;
-		game.physics.p2.gravity.y = y * 10 > 250 ? 250 : y * 90;
+		game.physics.p2.gravity.y = y * 10 > 100 ? 250 : y * 90;
 	}
 };
