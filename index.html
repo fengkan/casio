@@ -227,7 +227,9 @@
     }
 
     window.addEventListener("load", function () {
-      document.querySelector('audio').play()
+      var element = document.querySelector('audio')
+      element.play()
+      element.muted = false
 
       userID = setUserId();
       url = "http://casio.maxantad.com/users/" + userID
