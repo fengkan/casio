@@ -230,31 +230,31 @@
       userID = setUserId();
       url = "http://casio.maxantad.com/users/" + userID
 
-      $.getJSON(url, function (data) {
-        prize = data["result"]["coupon"];
-        play_count = data["result"]["play_count"];
-        share_count = data["result"]["share_count"];
+      // $.getJSON(url, function (data) {
+      //   prize = data["result"]["coupon"];
+      //   play_count = data["result"]["play_count"];
+      //   share_count = data["result"]["share_count"];
 
-        // 已玩一次且未分享
-        if ((play_count == 1 && share_count == 0)) {
-          window.location.href = "p13.html";
-        }
+      //   // 已玩一次且未分享
+      //   if ((play_count == 1 && share_count == 0)) {
+      //     window.location.href = "p13.html";
+      //   }
 
-        // 已玩两次
-        if (play_count > 1) {
-          window.location.href = "p12.html";
-        }
+      //   // 已玩两次
+      //   if (play_count > 1) {
+      //     window.location.href = "p12.html";
+      //   }
 
-        // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
-        if (prize != 1) {
-          $('.gift-box').show();
-          $('.gift-text').show();
-          couponTimeout = setTimeout("startGame()", 5000)
-        } else {
-          // 否则立刻开始游戏
+      //   // 如果之前没得礼盒，显示礼盒图标，等待五秒后进入游戏
+      //   if (prize != 1) {
+      //     $('.gift-box').show();
+      //     $('.gift-text').show();
+      //     couponTimeout = setTimeout("startGame()", 5000)
+      //   } else {
+      //     // 否则立刻开始游戏
           startGame();
-        }
-      })
+      //   }
+      // })
 
     })
 
@@ -262,6 +262,7 @@
       game = new Phaser.Game(1080, 1920, Phaser.CANVAS, 'game-page');
       game.state.add('game', Game);
       game.state.start('game');
+      document.querySelector('audio').play()
     }
     function hideRule() {
       document.querySelector('#rule-overlay').className = "hidden"
@@ -270,6 +271,16 @@
     function showRule() {
       document.querySelector('#rule-overlay').className = ""
       game.paused = true
+    }
+    function toggleMusic(){
+      var element=document.querySelector('audio')
+      if(element.muted){
+        element.muted=false
+        document.querySelector('#audio-button').src="img/p4/audio-on.png"
+      }else{
+        element.muted=true
+        document.querySelector('#audio-button').src="img/p4/audio-off.png"
+      }
     }
 
   </script>
@@ -292,6 +303,7 @@
   <script src="src/wx.js"></script>
   <script src="src/zepto.js"></script>
   <div id="game-page" class="page" style="z-index:98">
+    <audio src="audio/casio.ogg" loop></audio>
     <div id="rule-overlay" style="position:fixed;width:100%;height:100%;background-color:#231f20">
       <div style="width:100%;height:89vw;position:absolute;top:20vh;margin:0 auto;text-align:center">
         <div style="width:80vw;height:89vw;position:relative;display:inline-block;background:url(img/p3/rule.png) center/contain no-repeat;">
@@ -302,6 +314,7 @@
         </div>
       </div>
     </div>
+    <img id="audio-button" style="position:fixed;top:2vw;right:2vw" src="img/p4/audio-on.png" onclick="toggleMusic()">
   </div>
 </body>
 
