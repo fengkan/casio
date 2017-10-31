@@ -239,7 +239,7 @@
         share_count = data["result"]["share_count"];
 
         // 已玩一次且未分享
-        if ((play_count == 1 && share_count == 0)) {
+        if ((play_count == 1 && share_count === null)) {
           window.location.href = "p13.html";
         }
 
