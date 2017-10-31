@@ -74,9 +74,21 @@ Game.prototype = {
 			this.game.state.restart();
 		}
 		var winGame = function () {
-			prizeURL = getPrizeURL();
-			sendplayed();
-			window.location.href = prizeURL;
+		
+      var prize;
+      url = 'http://casio.maxantad.com/users/' + userID + '/prizes';
+      $.getJSON(url, function (data) {
+        prize = data["result"];
+        if (prize == 4) {
+          prizeURL = "p5.html"
+        } else if (prize <= 3 && prize >= 1){
+          prizeURL = "p6.html?p=" + prize
+        } else {
+          prizeURL = "p9.html"
+        }
+        sendplayed();
+        window.location.href = prizeURL;
+      })
 		}
 		ball.body.collides(trapCollisionGroup, restartGame)
 		ball.body.collides(destCollisionGroup, winGame)
