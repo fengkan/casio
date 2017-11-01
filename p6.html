@@ -149,8 +149,8 @@
     $('#overlay').hide();
   };
   document.querySelector('#btn_send').onclick = function () {
-    name = $('#name').attr("value");
-    phone = $('#phone').attr("value");
+    name = $('#name').val();
+    phone = $('#phone').val();
     url = 'http://casio.maxantad.com/users/' + userID + '?name='+name+'&phone='+phone;
     $.ajax({
     type:"get",
