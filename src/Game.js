@@ -69,26 +69,26 @@ Game.prototype = {
 		ball.body.fixedRotation = true
 		ball.body.setCollisionGroup(ballCollisionGroup)
 		ball.body.collides(mazeCollisionGroup)
-		ball.body.mass=0.1
+		ball.body.mass = 0.1
 		var restartGame = function () {
 			this.game.state.restart();
 		}
 		var winGame = function () {
-		
-      var prize;
-      url = 'http://casio.maxantad.com/users/' + userID + '/prizes';
-      $.getJSON(url, function (data) {
-        prize = data["result"];
-        if (prize == 4) {
-          prizeURL = "p5.html"
-        } else if (prize <= 3 && prize >= 1){
-          prizeURL = "p6.html?p=" + prize
-        } else {
-          prizeURL = "p9.html"
-        }
-        sendplayed();
-        window.location.href = prizeURL;
-      })
+
+			var prize;
+			url = 'http://casio.maxantad.com/users/' + userID + '/prizes';
+			$.getJSON(url, function (data) {
+				prize = data["result"];
+				if (prize == 4) {
+					prizeURL = "p5.html"
+				} else if (prize <= 3 && prize >= 1) {
+					prizeURL = "p6.html?p=" + prize
+				} else {
+					prizeURL = "p9.html"
+				}
+				sendplayed();
+				window.location.href = prizeURL;
+			})
 		}
 		ball.body.collides(trapCollisionGroup, restartGame)
 		ball.body.collides(destCollisionGroup, winGame)
@@ -113,7 +113,23 @@ Game.prototype = {
 		var x = e.gamma; // range [-90,90], left-right
 		var y = e.beta;  // range [-180,180], top-bottom
 		var z = e.alpha; // range [0,360], up-down
-		game.physics.p2.gravity.x = x * 10 > 250 ? 250 : x * 90;
-		game.physics.p2.gravity.y = y * 10 > 100 ? 250 : y * 90;
+		var MAX_GRAVITY_X = 250;
+		var MAX_GRAVITY_Y = 250;
+		var gravityX = x * 100;
+		var gravityY = y * 100;
+		if (gravityX > MAX_GRAVITY_X) {
+			gravityX = MAX_GRAVITY_X
+		}
+		if (gravityX < -MAX_GRAVITY_X) {
+			gravityX = -MAX_GRAVITY_X
+		}
+		if (gravityY > MAX_GRAVITY_Y) {
+			gravityY = MAX_GRAVITY_Y
+		}
+		if (gravityY < -MAX_GRAVITY_Y) {
+			gravityY = -MAX_GRAVITY_Y
+		}
+		game.physics.p2.gravity.x = gravityX;
+		game.physics.p2.gravity.y = gravityY;
 	}
 };
